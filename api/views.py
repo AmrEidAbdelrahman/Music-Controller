@@ -44,6 +44,25 @@ class Home(ModelViewSet):
         data['is_host'] = True if self.request.session.session_key == serializer.data['host'] else False
         return Response(data)
 
+    def update(self, request, *args, **kwargs):
+        if not self.request.session.exists(self.request.session.session_key):
+            self.request.session.create()
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        print(serializer.validated_data)
+        if not Room.objects.filter(code=serializer.validated_data['code'], host=self.request.session.session_key).exists():
+            return Response({"Bad Request": "You don't Have Authority to change this room settings"}, status=status.HTTP_403_FORBIDDEN)
+        self.perform_update(serializer)
+
+        if getattr(instance, '_prefetched_objects_cache', None):
+            # If 'prefetch_related' has been applied to a queryset, we need to
+            # forcibly invalidate the prefetch cache on the instance.
+            instance._prefetched_objects_cache = {}
+
+        return Response(serializer.data)
+
 
 class Join(APIView):
     def post(self, request, format=None):

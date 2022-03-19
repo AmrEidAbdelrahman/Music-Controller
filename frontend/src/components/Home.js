@@ -16,23 +16,24 @@ import Room from './Room';
 const Home = () => {
 
     const [roomCode, setRoomCode] = useState(null);
-    console.log("first value after declaration",roomCode); // gives REAL_CODE not null after refresh
-    useEffect(()=>{
-      console.log("Home Here!");
-      console.log("first lline in useEffect:", roomCode);
-      fetch("http://127.0.0.1:8000/api/user-in-room/", {
+    //console.log("first value after declaration",roomCode);
+    useEffect(async ()=>{
+      console.log("Home useEffect");
+      //console.log("first lline in useEffect:", roomCode);
+      await fetch("http://127.0.0.1:8000/api/user-in-room/", {
           method: "GET",
           headers: {
               'Content-Type': 'application/json'
           }
       })
-      .then((response) => {console.log(response);return response.json();})
-      .then((data) => {
-          //console.log("home data: ",data);
-          setRoomCode(data.code);
-          //console.log("room from home:", roomCode);
+      .then((response) => {
+        console.log("3 ", response);
+        return response.json();
       })
-     //return ( setRoomCode(null) )
+      .then((data) => {
+          setRoomCode(data.code);
+      })
+      return ( setRoomCode(null) )
     }, [])
     
     const renderHomePage = () => {
@@ -61,8 +62,15 @@ const Home = () => {
         <Router>
             <Switch>
                 <Route exact path='/' render={() => {
-                  console.log('reoute',roomCode);
-                  return roomCode ? <Redirect to={`room/${roomCode}/`}/>  : renderHomePage()   
+                  if (roomCode){
+                    console.log('log 1 ',roomCode);
+                    //setRoomCode(null);
+                    return <Redirect to={`room/${roomCode}/`}/>
+                  }
+                  else {
+                    console.log("log 4")
+                    return renderHomePage();
+                  }
                 }}>
                 </Route>
                 <Route path="/join/" component={Join}/>
