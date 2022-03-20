@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Join from './Join';
 import Create from './Create';
-import { Grid, Button, ButtonGroup, Typography } from "@material-ui/core";
+import { Grid, Button, ButtonGroup, Typography, Container, makeStyles } from "@material-ui/core";
 
 import {
     BrowserRouter as Router,
@@ -14,12 +14,8 @@ import Room from './Room';
 
 
 const Home = () => {
-
     const [roomCode, setRoomCode] = useState(null);
-    //console.log("first value after declaration",roomCode);
     useEffect(async ()=>{
-      console.log("Home useEffect");
-      //console.log("first lline in useEffect:", roomCode);
       await fetch("https://spo-music-controller.herokuapp.com/api/user-in-room/", {
           method: "GET",
           headers: {
@@ -27,7 +23,6 @@ const Home = () => {
           }
       })
       .then((response) => {
-        console.log("3 ", response);
         return response.json();
       })
       .then((data) => {
@@ -38,23 +33,26 @@ const Home = () => {
     
     const renderHomePage = () => {
         return (
-          <Grid container spacing={3}>
-            <Grid item xs={12} align="center">
-              <Typography variant="h3" compact="h3">
-                House Party {roomCode}
-              </Typography>
+          <Container >
+            <Grid container spacing={3} >
+              <Grid item xs={12} align="center">
+                <Typography variant="h3" compact="h3">
+                  House Party
+                </Typography>
+              </Grid>
+              <Grid item xs={12} align="center">
+                <ButtonGroup disableElevation variant="contained" color="primary">
+                  <Button color="primary" to="/join" component={Link}>
+                    Join a Room
+                  </Button>
+                  <Button color="secondary" to="/create" component={Link}>
+                    Create a Room
+                  </Button>
+                </ButtonGroup>
+              </Grid>
             </Grid>
-            <Grid item xs={12} align="center">
-              <ButtonGroup disableElevation variant="contained" color="primary">
-                <Button color="primary" to="/join" component={Link}>
-                  Join a Room
-                </Button>
-                <Button color="secondary" to="/create" component={Link}>
-                  Create a Room
-                </Button>
-              </ButtonGroup>
-            </Grid>
-          </Grid>
+          </Container>
+          
         );
       }
 
@@ -63,8 +61,6 @@ const Home = () => {
             <Switch>
                 <Route exact path='/' render={() => {
                   if (roomCode){
-                    console.log('log 1 ',roomCode);
-                    //setRoomCode(null);
                     return <Redirect to={`room/${roomCode}/`}/>
                   }
                   else {

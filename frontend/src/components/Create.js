@@ -55,7 +55,6 @@ const Create = (props) => {
               'Content-Type': 'application/json'
           },
           body: JSON.stringify({'votes_to_skip': votesToSkip, 'guest_can_pause': guestCanPause, 'code':props.roomCode})
-          //body: JSON.stringify({'votes_to_skip': votesToSkip, 'guest_can_pause': guestCanPause, 'code':"props.roomCode"})
       })
       .then((response) => {
         if (response.ok){

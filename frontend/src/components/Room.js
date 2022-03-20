@@ -87,7 +87,7 @@ const Room = () => {
             <p>Controll Allowed: {room.guest_can_pause ? "true" : "false"}</p>
             <p>Owner: {room.is_host ? "true":"false"}</p>
             {room.is_host ? (
-                <Button color="primary" onClick={openSettings}>
+                <Button color="primary" variant="contained" onClick={openSettings}>
                     Settings
                 </Button>
             )

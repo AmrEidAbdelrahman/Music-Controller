@@ -1,14 +1,22 @@
+import { Container, makeStyles } from '@material-ui/core';
 import React from 'react';
 import {render} from 'react-dom';
 import Home from "./Home";
 
 
-
+const useStyle = makeStyles({
+    main: {
+      marginTop: 170,
+    }
+  })
 
 const App = () => {
-    return (
+    const classes = useStyle();
 
-        <Home />
+    return (
+        <Container className={classes.main}>
+            <Home />
+        </Container>
 
     );
 }
