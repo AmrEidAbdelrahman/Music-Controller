@@ -39,7 +39,7 @@ const Room = () => {
 
     const handleLeave = async ()=> {
         console.log("handleLeave");
-        await fetch("http://127.0.0.1:8000/api/user-leave-room/", {
+        await fetch("https://spo-music-controller.herokuapp.com/api/user-leave-room/", {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json'
