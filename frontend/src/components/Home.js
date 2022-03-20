@@ -20,7 +20,7 @@ const Home = () => {
     useEffect(async ()=>{
       console.log("Home useEffect");
       //console.log("first lline in useEffect:", roomCode);
-      await fetch("http://127.0.0.1:8000/api/user-in-room/", {
+      await fetch("https://spo-music-controller.herokuapp.com/api/user-in-room/", {
           method: "GET",
           headers: {
               'Content-Type': 'application/json'

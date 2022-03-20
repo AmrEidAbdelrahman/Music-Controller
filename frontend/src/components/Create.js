@@ -31,7 +31,7 @@ const Create = (props) => {
     const handleRoomButtonPressed = () => {
         console.log(guestCanPause);
         console.log(votesToSkip);
-        fetch("http://127.0.0.1:8000/api/room/", {
+        fetch("https://spo-music-controller.herokuapp.com/api/room/", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ const Create = (props) => {
       console.log("Updating ....");
       console.log(guestCanPause);
       console.log(votesToSkip);
-      fetch(`http://127.0.0.1:8000/api/room/${props.roomCode}/`, {
+      fetch(`https://spo-music-controller.herokuapp.com/api/room/${props.roomCode}/`, {
           method: "PATCH",
           headers: {
               'Content-Type': 'application/json'

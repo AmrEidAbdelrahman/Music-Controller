@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-rr$c)nk3h0ad2mat^jef3(l(!r+6c8lynlr4@r(w+p+9tpmi$8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://spo-music-controller.herokuapp.com/']
 
 
 # Application definition

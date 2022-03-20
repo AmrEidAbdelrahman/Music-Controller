@@ -12,7 +12,7 @@ const Room = () => {
 
     useEffect(()=>{
         console.log("Room useEffect Here! 2");
-        fetch(`http://127.0.0.1:8000/api/room/${room_code}`, {
+        fetch(`https://spo-music-controller.herokuapp.com/api/room/${room_code}`, {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',

@@ -14,7 +14,7 @@ const Join = () => {
 
     const roomButtonPressed = () => {
         console.log("roomButtonPressed");
-        fetch("http://127.0.0.1:8000/api/join-room/", {
+        fetch("https://spo-music-controller.herokuapp.com/api/join-room/", {
             method:"POST",
             headers: {
                 "Content-Type": "application/json",
